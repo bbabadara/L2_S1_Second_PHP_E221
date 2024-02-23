@@ -1,0 +1,3 @@
+commande = (idc, datec, montant, etat);
+article = (ida, libelle, prixunitaire, qtestock);
+avoir = (qtecomd, #ida, #idc);
