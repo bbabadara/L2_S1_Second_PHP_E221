@@ -1,3 +1,5 @@
-commande = (idc, datec, montant, etat);
+client(id,nom,prenom,telephone);
+etat(idetat, nometat);
+commande =(idc, datec, montant, #idetat,#id);
 article = (ida, libelle, prixunitaire, qtestock);
 avoir = (qtecomd, #ida, #idc);

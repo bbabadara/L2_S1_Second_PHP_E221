@@ -15,6 +15,7 @@
 </form>
  <table  >
     <thead>
+        <th>Client</th>
         <th>Date</th>
         <th>Montant</th>
         <th>Etat</th>
@@ -24,9 +25,10 @@
        
     <?php foreach ($commandes as $key => $commande) : ?>
         <tr>
+             <td><?= $commande["prenom"]." ".$commande["nom"] ?></td>
             <td><?=  $commande["datec"] ?></td>
             <td><?=  $commande["montant"] ?></td>
-            <td><?=  $commande["etat"] ?></td>
+            <td><?=  $commande["nometat"] ?></td>
             <td> <a href="<?= WEBROOT?>/?controller=article&page=article&key=<?=  $commande["idc"] ?>"> Articles</a> </td>
         </tr>
         <?php endforeach?>
