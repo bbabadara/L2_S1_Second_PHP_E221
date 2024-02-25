@@ -25,7 +25,7 @@ if (isset($_REQUEST["page"])) {
             }
             
         } else {
-            $tab=["prenom"=>$_POST["prenom"],"nom"=>$_POST["nom"],"tel"=>$_POST["tel"],"msg"=>"Veillez remplir tous les champs SVP!!!"];
+            $tab=["prenom"=>$_POST["prenom"],"nom"=>$_POST["nom"],"tel"=>$_POST["tel"],"msg"=>"Veuillez remplir tous les champs SVP!!!"];
             loadview("client/ajoutclient.html.php",["tab"=>$tab]);   
         }
         

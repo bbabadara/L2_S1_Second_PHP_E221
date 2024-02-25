@@ -7,6 +7,7 @@ if (isset($_REQUEST["page"])) {
         $commandes=isset($key)?findAllCommandesByClientId($filtre,$key):findAllCommandes($filtre);
         loadview("commande/allcommande.html.php",["commandes"=>$commandes,"etats"=>$etats]);  
     }else  if ($_REQUEST["page"] == "ajoutcommande") {
+        
         loadview("commande/ajoutcommande.html.php");     
     }
 }else{
