@@ -19,6 +19,8 @@ function findAllArticles(){
            $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
            $statement=$conn->query($sql);
            $data=$statement->fetchAll();  
+           $conn==null;
+           $statement==null;
        } catch(PDOException $e){
            echo "Erreur : " . $e->getMessage();
        }
@@ -38,6 +40,8 @@ function findArticlesByCommandeId($id){
            $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
            $statement=$conn->query($sql);
            $data=$statement->fetchAll();  
+           $conn==null;
+           $statement==null;
        } catch(PDOException $e){
            echo "Erreur : " . $e->getMessage();
        }

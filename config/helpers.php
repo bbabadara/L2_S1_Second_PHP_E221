@@ -8,3 +8,7 @@ function loadview(string $views,array $data=[],$layout="base"){
     // dd($cFV);
     require_once("../views/layout/".$layout.".layout.php");
 }
+
+function redirectToRoute(string $controller,string $page){
+    header("location:".WEBROOT."/?controller=$controller&page=$page");
+}

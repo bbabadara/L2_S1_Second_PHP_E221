@@ -5,6 +5,8 @@ if (isset($_REQUEST["controller"])) {
         require_once("../controller/commande.controller.php");
     } else  if ($_REQUEST["controller"]=="article") {
         require_once("../controller/article.controller.php");
+    } else  if ($_REQUEST["controller"]=="client") {
+        require_once("../controller/client.controller.php");
     }
 }else {
     require_once("../controller/article.controller.php");

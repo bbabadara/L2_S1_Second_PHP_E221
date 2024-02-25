@@ -7,6 +7,9 @@ text-decoration: none;
 list-style: none;
 
 }
+body{
+    background-color: rgb(230, 230, 240);
+}
 
 table{
 /* border: solid black 2px; */
@@ -20,7 +23,7 @@ table-layout: fixed;
 th {
 border: solid 1px black;
 padding: 2%;
-background-color: rgb(69, 69, 187);
+background-color: rgb(73, 73, 221);
 color: aqua;
 text-align: center;
 }
@@ -47,7 +50,7 @@ align-items: center;
 
 .header{
 height: 15vh;
-background-color: blue;
+background-color: rgb(73, 73, 221);
 justify-content: space-around;
 color: white;
 }

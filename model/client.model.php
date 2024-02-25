@@ -1,11 +1,6 @@
 <?php
-function findAllCommandes(int $filtre):array{
-    $sql="select *,DATE_FORMAT(datec, '%d/%m/%Y') as datec from commande c,client cl, etatcom et where c.id=cl.id and c.idetat=et.idetat";
-    if ($filtre!=0) {
-        $sql=$sql." and et.idetat=$filtre";
-    }
-    
-    // dd($sql);
+function findAllClients(){
+    $sql="select * from client ";
         $data=null;
        $servername = 'localhost';
        $username = 'gesarticle';
@@ -16,53 +11,51 @@ function findAllCommandes(int $filtre):array{
            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
            $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
            $statement=$conn->query($sql);
-           $data=$statement->fetchAll();  
-       } catch(PDOException $e){
-           echo "Erreur : " . $e->getMessage();
-       }
-    return $data;
-}
-
-function findAllEtats(){
-    $sql="select * from etatcom ";
-        $data=null;
-       $servername = 'localhost';
-       $username = 'gesarticle';
-       $password = 'passer123';
-       $dbname="article";
-       try{
-           $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-           $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-           $statement=$conn->query($sql);
-           $data=$statement->fetchAll();  
-       } catch(PDOException $e){
-           echo "Erreur : " . $e->getMessage();
-       }
-    return $data;
-}
-
-function findAllCommandesByClientId(int $filtre,$id):array{
-    $sql="select *,DATE_FORMAT(datec, '%d/%m/%Y') as datec from commande c, etatcom et where cl.id=$id and c.idetat=et.idetat";
-    if ($filtre!=0) {
-        $sql=$sql." and et.idetat=$filtre";
-    }
-    dd($sql);
-        $data=null;
-       $servername = 'localhost';
-       $username = 'gesarticle';
-       $password = 'passer123';
-       $dbname="article";
-       try{
-           $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-           $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-           $statement=$conn->query($sql);
-           $data=$statement->fetchAll();  
+           $data=$statement->fetchAll(); 
            $conn==null;
-           $statement==null;
+           $statement==null; 
        } catch(PDOException $e){
            echo "Erreur : " . $e->getMessage();
        }
     return $data;
+}
+
+function verifPhone($tel){
+    $sql="select telephone from client where telephone like $tel ";
+        $data=null;
+       $servername = 'localhost';
+       $username = 'gesarticle';
+       $password = 'passer123';
+       $dbname="article";
+       try{
+           $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+           $statement=$conn->query($sql);
+           $data=$statement->fetch(); 
+           $conn==null;
+           $statement==null; 
+       } catch(PDOException $e){
+           echo "Erreur : " . $e->getMessage();
+       }
+    return $data;
+}
+
+function AddClient(array $Nclient){
+    $sql="insert into client (nom, prenom, telephone) values (:nom,:prenom,:telephone)";
+       $servername = 'localhost';
+       $username = 'gesarticle';
+       $password = 'passer123';
+       $dbname="article";
+       try{
+           $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+           $statement=$conn->prepare($sql);
+           $statement->execute($Nclient); 
+           $conn==null;
+           $statement==null; 
+       } catch(PDOException $e){
+           echo "Erreur : " . $e->getMessage();
+       }
 }

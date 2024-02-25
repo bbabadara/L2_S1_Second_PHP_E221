@@ -4,12 +4,11 @@ if (isset($_REQUEST["page"])) {
         $filtre=isset($_POST["etat"])?$_POST["etat"]:0;
         $_SESSION["filtre"]= $filtre;
         $etats=findAllEtats();
-        $commandes =findAllCommandes($filtre);
-        loadview("commande/allcommande.html.php",["commandes"=>$commandes,"etats"=>$etats]);
-        
+        $commandes=isset($key)?findAllCommandesByClientId($filtre,$key):findAllCommandes($filtre);
+        loadview("commande/allcommande.html.php",["commandes"=>$commandes,"etats"=>$etats]);  
+    }else  if ($_REQUEST["page"] == "ajoutcommande") {
+        loadview("commande/ajoutcommande.html.php");     
     }
 }else{
-    header("location:WEBROOT/?controller=commande&page=commande");
-    // $commandes=findAllCommandes();
-    // loadview("commande/allcommande.html.php",["commandes"=>$commandes]);
+    redirectToRoute("commande","commande");
 }
