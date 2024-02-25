@@ -13,7 +13,7 @@ if (isset($_REQUEST["page"])) {
         
     // }
 }else{
-     
-    $articles =findAllArticles();
-    loadview("article/allarticle.html.php",["articles"=>$articles]);
+    header("location:WEBROOT/?controller=article&page=article");
+    // $articles =findAllArticles();
+    // loadview("article/allarticle.html.php",["articles"=>$articles]);
 }

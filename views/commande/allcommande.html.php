@@ -4,12 +4,13 @@
     <div class="formc flex">
     <div class="col-10">
 <select name="etat" id="">
-    <option value="tous">Tous</option>
-    <option value="1"> Disponible </option>
-    <option value="0"> En rupture </option>
+    <option value="0">Tout</option>
+<?php foreach ($etats as $etat) : ?>
+    <option value="<?=$etat["idetat"] ?>"  <?php if($etat["idetat"]==$_SESSION["filtre"]) echo "selected" ?> > <?=$etat["nometat"] ?> </option>
+    <?php endforeach?>
 </select>
 <input type="hidden" name="controller" value="commande">
-<button type="submit" name="page" value="demande"> OK </button>
+<button type="submit" name="page" value="commande"> OK </button>
 </div>
 </div>
 </form>
