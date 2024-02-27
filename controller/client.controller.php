@@ -4,28 +4,30 @@ if (isset($_REQUEST["page"])) {
         loadview("client/ajoutclient.html.php");     
     }else 
      if ($_REQUEST["page"] == "listclient") {
+        $nombre=countTab("id","client");
         $clients=findAllClients();
-        loadview("client/listclient.html.php",["clients"=>$clients]);     
+        loadview("client/listclient.html.php",["clients"=>$clients,"nombre"=>$nombre]);     
     }else
     if ($_REQUEST["page"] == "addclient") {
-        if (!empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["tel"])) {
-            $verif=verifPhone($_POST["tel"]);
+        $nom=trim($_POST["nom"]);$prenom=trim($_POST["prenom"]);$tel=trim($_POST["tel"]);
+        if (!empty($prenom) && !empty($nom) && !empty($tel)) {
+            $verif=verifPhone($tel);
             // dd($verif);
             if (!$verif) {
                 $Nclient=[
-                    "nom"=>$_POST["nom"],
-                    "prenom"=>$_POST["prenom"],
-                    "telephone"=>$_POST["tel"]
+                    "nom"=>$nom,
+                    "prenom"=>$prenom,
+                    "telephone"=>$tel
                 ];
-                AddClient($Nclient);
+                addClient($Nclient);
                 redirectToRoute("client","listclient");
             } else {
-                $tab=["prenom"=>$_POST["prenom"],"nom"=>$_POST["nom"],"tel"=>$_POST["tel"],"msg"=>"Ce numero de telephone existe deja!!!"];
+                $tab=["prenom"=>$prenom,"nom"=>$nom,"tel"=>$tel,"msg"=>"Ce numero de telephone existe deja!!!"];
             loadview("client/ajoutclient.html.php",["tab"=>$tab]);
             }
             
         } else {
-            $tab=["prenom"=>$_POST["prenom"],"nom"=>$_POST["nom"],"tel"=>$_POST["tel"],"msg"=>"Veuillez remplir tous les champs SVP!!!"];
+            $tab=["prenom"=>$prenom,"nom"=>$nom,"tel"=>$tel,"msg"=>"Veuillez remplir tous les champs SVP!!!"];
             loadview("client/ajoutclient.html.php",["tab"=>$tab]);   
         }
         

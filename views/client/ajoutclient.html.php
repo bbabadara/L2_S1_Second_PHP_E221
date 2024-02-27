@@ -5,15 +5,15 @@
     <h1> Ajouter un client</h1>
         <div class="col-10">
             <label for="non">Nom*</label>
-            <input type="text" name="nom" value="<?php if (isset($tab)) echo $tab["nom"] ?>">
+            <input type="text" name="nom" value="<?php if (isset($tab)) echo $tab["nom"] ?>" required>
         </div>
         <div class="col-10">
             <label for="non">Prenom*</label>
-            <input type="text" name="prenom" value="<?php if (isset($tab)) echo $tab["prenom"] ?>">
+            <input type="text" name="prenom" value="<?php if (isset($tab)) echo $tab["prenom"] ?>" required>
         </div>
         <div class="col-10">
             <label for="non">Telephone*</label>
-            <input type="text" name="tel" value="<?php if (isset($tab)) echo $tab["tel"] ?>">
+            <input type="text" name="tel" value="<?php if (isset($tab)) echo $tab["tel"] ?>" required>
         </div>
         <input type="hidden" name="controller" value="client">
         <label for="message" class="espaceTB"><?php if (isset($tab)) echo $tab["msg"] ?></label>

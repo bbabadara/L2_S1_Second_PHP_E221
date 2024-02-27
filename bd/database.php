@@ -1,4 +1,25 @@
 <?php
+function countTab(string $col,string $table){
+    $sql="select count($col) as total  from $table ";
+    $data=null;
+   $servername = 'localhost';
+   $username = 'gesarticle';
+   $password = 'passer123';
+   $dbname="article";
+   try{
+       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+       $statement=$conn->query($sql);
+       $data=$statement->fetch();  
+       $conn==null;
+       $statement==null;
+   } catch(PDOException $e){
+       echo "Erreur : " . $e->getMessage();
+   }
+return $data;
+}
+
 function ouvrirConnexion($servername, $username, $password, $dbname){
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -56,31 +77,31 @@ function close_connection($conn) {
 
 // Exemple d'utilisation :
 
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = "bd-php-updated";
+// $servername = 'localhost';
+// $username = 'root';
+// $password = '';
+// $dbname = "bd-php-updated";
 
-$conn = connect_to_database($servername, $username, $password, $dbname);
+// $conn = connect_to_database($servername, $username, $password, $dbname);
 
-if ($conn) {
-    $login = $_POST['login']; // Supposons que vous récupériez les données du formulaire
-    $pwd = $_POST['password'];
+// if ($conn) {
+//     $login = $_POST['login']; // Supposons que vous récupériez les données du formulaire
+//     $pwd = $_POST['password'];
     
-    $sql = "SELECT idet, nomet, prenomet, matricule, nomp AS role FROM users u 
-            INNER JOIN profil p ON u.idp = p.idp 
-            WHERE loginet = :login AND mdp = :password";
+//     $sql = "SELECT idet, nomet, prenomet, matricule, nomp AS role FROM users u 
+//             INNER JOIN profil p ON u.idp = p.idp 
+//             WHERE loginet = :login AND mdp = :password";
     
-    $params = array(':login' => $login, ':password' => $pwd);
+//     $params = array(':login' => $login, ':password' => $pwd);
     
-    $statement = execute_query($conn, $sql, $params);
+//     $statement = execute_query($conn, $sql, $params);
     
-    if ($statement) {
-        $data = $statement->fetch();
-        // Traitement des données récupérées
-        // ...
+//     if ($statement) {
+//         $data = $statement->fetch();
+//         // Traitement des données récupérées
+//         // ...
         
-        // Fermeture de la connexion
-        close_connection($conn);
-    }
-}
+//         // Fermeture de la connexion
+//         close_connection($conn);
+//     }
+// }
