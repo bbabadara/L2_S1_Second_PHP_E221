@@ -23,24 +23,53 @@ if (isset($_REQUEST["page"])) {
                 $tab = ["tel" => $_POST["tel"], "msg" => " Veuillez saisir un numero."];
                 loadview("commande/ajoutcommande.html.php", ["tab" => $tab]);
             }
-        }else               
+        } else               
         if (isset($_POST["ref"])) {
             // dd($_POST);
             $ref = trim($_POST["ref"]);
             if (!empty($ref)) {
-                $_SESSION["article"]= findArticleByRef($ref);
+                $_SESSION["article"] = findArticleByRef($ref);
                 if ($_SESSION["article"]) {
                     loadview("commande/ajoutcommande.html.php");
                 } else {
                     $tab = ["ref" => $_POST["ref"], "msg2" => "Article introuvable! Veuillez verifier votre saisie."];
-                loadview("commande/ajoutcommande.html.php", ["tab" => $tab]);
-                }   
+                    loadview("commande/ajoutcommande.html.php", ["tab" => $tab]);
+                }
             } else {
                 $tab = ["ref" => $_POST["ref"], "msg2" => " Veuillez saisir un article."];
                 loadview("commande/ajoutcommande.html.php", ["tab" => $tab]);
             }
-        }
-         else {
+        } else               
+        if (isset($_POST["qte"])) {
+            // dd($_POST);
+            
+            $qte = intval(trim($_POST["qte"]));
+            if (!empty($qte)) {
+                if ($qte<0) {
+                    $tab = ["qte" => $_POST["qte"], "msg3" => "La quantite saisie doit etre superieur a zero!!!"];
+                    loadview("commande/ajoutcommande.html.php", ["tab" => $tab]);
+                }
+                 else if ($_SESSION["article"]["qtestock"] >= $qte) {
+                    $nart=[
+                        "libelle"=>$_SESSION["article"]["libelle"],
+                        "prix"=>$_SESSION["article"]["prixunitaire"],
+                        "qte"=>$qte
+                    ];
+                    $_SESSION["ncom"][]=$nart;
+                    //  unset($_SESSION["ncom"]);
+                    //  unset($_SESSION["article"]);
+                    //  unset($_SESSION["client-c"]);
+                    $_SESSION["article"]["qtestock"]=$_SESSION["article"]["qtestock"]-$qte;
+                    loadview("commande/ajoutcommande.html.php");
+                } else {
+                    $tab = ["qte" => $_POST["qte"], "msg3" => "La quantite saisie doit etre inferieur a la quantite en stock"];
+                    loadview("commande/ajoutcommande.html.php", ["tab" => $tab]);
+                }
+            } else {
+                $tab = ["qte" => $_POST["qte"], "msg3" => " Veuillez saisir la quantite."];
+                loadview("commande/ajoutcommande.html.php", ["tab" => $tab]);
+            }
+        } else {
             loadview("commande/ajoutcommande.html.php", ["tab" => $tab]);
         }
     }

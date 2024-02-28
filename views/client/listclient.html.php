@@ -36,6 +36,11 @@
 
 ?>
 <h1> Liste des clients </h1>
+<div class="col-12 flex aic jcc">
+<div class="col-8 flex aiend">
+    <button><a href="<?= path('client','ajoutclient')?>">Ajouter</a></button>
+</div>
+</div>
 <table>
     <thead>
         <th>Prenom</th>
@@ -49,8 +54,8 @@
                 <td><?= $client["prenom"] ?></td>
                 <td><?= $client["nom"] ?></td>
                 <td><?= $client["telephone"] ?></td>
-                <td> <a href="<?= WEBROOT ?>/?controller=commande&page=commande&key=<?= $client["id"] ?>"> Commandes</a> </td>
-
+                <!-- <td> <a href="<?= WEBROOT ?>/?controller=commande&page=commande&key=<?= $client["id"] ?>"> Commandes</a> </td> -->
+                <td> <a href=" <?= path('commande','commande',['key'=>$client["id"] ])?>"> Commandes</a> </td>
             </tr>
         <?php endforeach ?>
     </tbody>

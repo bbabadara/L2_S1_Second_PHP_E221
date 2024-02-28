@@ -80,43 +80,42 @@
             <div class="col-10">
                 
                 <label for="non">Qantite*</label>
-                <input type="number" name="qte"  required>
+                <input type="number" name="qte" value="<?= isset($tab["qte"]) ? $tab["qte"]: "" ?>" required>
             </div>
             
             <input type="hidden" name="controller" value="commande">
-            <label for="message" class="mt1"><?php if (isset($tab["msg2"])) echo $tab["msg2"] ?></label>
+            <label for="message" class="mt1"><?php if (isset($tab["msg3"])) echo $tab["msg3"] ?></label>
             <div class="col-10">
                 <button type="submit" name="page" value="ajoutcommande" class="bgreen"> Ajouter </button>
             </div>
         </div>
 
     </form>
+    <?php if (!empty($_SESSION["ncom"])) : ?>
     <table>
     <thead>
         <th>Libelle</th>
-        <th>Prix unitaire</th>
+        <th>Prix unitaire (fcfa)</th>
         <th> Quantite</th>
-        <th>Montant</th>
+        <th>Montant (fcfa)</th>
     </thead>
     <tbody>
-        <?php //foreach ($clients as $key => $client) : ?>
+    <?php  $som=0; foreach ($_SESSION["ncom"] as $key => $nart) : $som=$som+($nart["prix"]* $nart["qte"] );?>
             <tr>
-                <!-- <td><?= $client["prenom"] ?></td>
-                <td><?= $client["nom"] ?></td>
-                <td><?= $client["telephone"] ?></td>
-                <td><?= $client["telephone"] ?></td> -->
-                <td>qwerty</td>
-                <td>qwerty</td>
-                <td>qwerty</td>
-                <td>qwerty</td>
+                <td><?= $nart["libelle"] ?></td>
+                <td><?= $nart["prix"] ?> </td>
+                <td><?= $nart["qte"] ?></td>
+                <td><?= $nart["prix"]* $nart["qte"] ?> </td>
             </tr>
+             <?php endforeach ?>
             <tr>
-                <td colspan="4">Total: </td>
+                <td colspan="4">Total: <?= $som ?> fcfa</td>
             </tr>
-        <?php //endforeach ?>
+       
     </tbody>
 
 </table>
+<?php endif ?>
 
 <?php endif ?>
 
