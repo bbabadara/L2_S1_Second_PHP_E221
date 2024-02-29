@@ -1,6 +1,6 @@
 <h1> Tous les commandes</h1>
 
-<form action="<?= WEBROOT ?>" method="post">
+<form action="<?= WEBROOT ?>" method="get">
     <div class="formc flex aic jcc col-5">
         <div class="col-10 flex jc-se aic">
             <select name="etat" id="" class="col-5">
@@ -16,7 +16,7 @@
 </form>
 <table>
     <thead>
-        <th>Client</th>
+        <th>commande</th>
         <th>Date</th>
         <th>Montant</th>
         <th>Etat</th>
@@ -37,3 +37,17 @@
 
     </tbody>
 </table>
+<div class="flex jcc aic col-12 espaceTB">
+    <div class="pagination ">
+        <?php if ($page > 1) : ?>
+            <a href="<?= path('commande', 'commande', ['pos' => ($page-1),"etat"=>$_SESSION["filtre"]]) ?>" class="prev">&laquo; Précedente</a>
+        <?php endif ?>
+
+        <?php for ($i = 1; $i <= $nbr_page; $i++) : ?>
+            <a href=" <?= path('commande', 'commande', ['pos' => $i,"etat"=>$_SESSION["filtre"]]) ?>" class=<?=$page==$i?"active":""?>><?= $i ?> </a>
+        <?php endfor ?>
+        <?php if ($page < $nbr_page) : ?>
+        <a href="<?= path('commande', 'commande', ['pos' => ($page+1),"etat"=>$_SESSION["filtre"]]) ?>" class="next">Suivant &raquo;</a>
+        <?php endif ?>
+    </div>
+</div>

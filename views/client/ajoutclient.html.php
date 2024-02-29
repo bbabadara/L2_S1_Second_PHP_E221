@@ -15,7 +15,7 @@ if (isset($_SESSION["tab"])) {
         <div class="col-10">
             <label for="non">Nom*</label>
             <br><span class="redcol"><?php if (isset($errors["nom"] )) echo $errors["nom"] ?></span>
-            <input type="text" name="nom" value="<?php if (isset($tab)) echo $tab["nom"] ?>" >
+            <input type="text" name="nom" value="<?php if (isset($tab)) echo $tab["nom"] ?>">
             
         </div>
         <div class="col-10 mt1">

@@ -17,4 +17,17 @@
 
  </table>
 
- 
+ <div class="flex jcc aic col-12 espaceTB">
+    <div class="pagination ">
+        <?php if ($page > 1) : ?>
+            <a href="<?= path('article', 'article', ['pos' => ($page-1)]) ?>" class="prev">&laquo; Précedente</a>
+        <?php endif ?>
+
+        <?php for ($i = 1; $i <= $nbr_page; $i++) : ?>
+            <a href=" <?= path('article', 'article', ['pos' => $i]) ?>" class=<?=$page==$i?"active":""?>><?= $i ?> </a>
+        <?php endfor ?>
+        <?php if ($page < $nbr_page) : ?>
+        <a href="<?= path('article', 'article', ['pos' => ($page+1)]) ?>" class="next">Suivant &raquo;</a>
+        <?php endif ?>
+    </div>
+</div>

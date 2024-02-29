@@ -8,9 +8,9 @@ if (isset($_REQUEST["page"])) {
         $page=isset($_GET["pos"])?$_GET["pos"]:1;
         $nbr_page=ceil($total/5);
         $debut= ($page - 1)*5;
-        // dd($nbr_page);
         $clients = findAllClients($debut);
-        loadview("client/listclient.html.php", ["clients" => $clients,"nbr_page"=> $nbr_page]);
+        //  dd(count($clients));
+        loadview("client/listclient.html.php", ["clients" => $clients,"nbr_page"=> $nbr_page,"page"=>$page]);
     } else
     if ($_REQUEST["page"] == "addclient") {
         $errors = [];
@@ -33,14 +33,15 @@ if (isset($_REQUEST["page"])) {
                     "telephone" => $tel
                 ];
                 addClient($Nclient);
-                // redirectToRoute("client","listclient");
+                redirectToRoute("client","listclient");
+                exit;
             } else {
                 $_SESSION["errors"] = ["tel" => "Ce numero de telephone existe deja!!!"];
             }
         } else {
             $_SESSION["errors"] = $errors;
         }
-        redirectToRoute("client", "listclient");
+        redirectToRoute("client", "ajoutclient");
     }
 } else {
     redirectToRoute("client", "listclient");

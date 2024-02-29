@@ -43,3 +43,9 @@ function countElement(string $table){
     $sql= "select count(*) as total from $table"  ;
    return executeSelect($sql,[],true);
 }
+
+function helpPagination(int $total,$nbr_el):void{
+    $page=isset($_GET["pos"])?$_GET["pos"]:1;
+    $nbr_page=ceil($total/$nbr_el);
+    $debut= ($page - 1)*$nbr_el;
+}

@@ -1,11 +1,15 @@
 <?php
 if (isset($_REQUEST["page"])) {
     if ($_REQUEST["page"] == "commande") {
-        $filtre = isset($_POST["etat"]) ? $_POST["etat"] : 0;
+        $filtre = isset($_GET["etat"]) ? $_GET["etat"] : 0;
         $_SESSION["filtre"] = $filtre;
         $etats = findAllEtats();
-        $commandes = isset($key) ? findAllCommandesByClientId($filtre, $key) : findAllCommandes($filtre);
-        loadview("commande/allcommande.html.php", ["commandes" => $commandes, "etats" => $etats]);
+        extract(countElement("commande"));
+        $page=isset($_GET["pos"])?$_GET["pos"]:1;
+        $nbr_page=ceil($total/5);
+        $debut= ($page - 1)*5;
+        $commandes = isset($key) ? findAllCommandesByClientId($filtre, $key,$debut) : findAllCommandes($filtre,$debut);
+        loadview("commande/allcommande.html.php", ["commandes" => $commandes, "etats" => $etats,"nbr_page"=> $nbr_page,"page"=>$page]);
     } else  if ($_REQUEST["page"] == "ajoutcommande") {
         $tab = [];
         if (isset($_POST["tel"])) {

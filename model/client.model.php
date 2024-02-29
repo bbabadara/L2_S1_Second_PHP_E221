@@ -1,7 +1,7 @@
 <?php
-function findAllClients($limit=0){
+function findAllClients($debut=0){
     $sql="select * from client ";
-    $sql=$sql."limit $limit,5";
+    $sql=$sql."limit $debut,5";
     return executeSelect($sql);
 }
 
