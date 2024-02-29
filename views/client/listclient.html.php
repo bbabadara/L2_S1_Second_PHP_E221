@@ -64,11 +64,10 @@
 <div class="flex jcc aic col-12 espaceTB">
     <div class="pagination ">
         <a href="#" class="prev">&laquo; Previous</a>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
+
+        <?php for ($i = 1; $i <= $nbr_page; $i++) : ?>
+        <a href=" <?= path('client','listclient',['pos'=>$i ])?>" class="active"><?= $i ?> </a>
+        <?php endfor ?>
         <a href="#" class="next">Next &raquo;</a>
     </div>
 </div>

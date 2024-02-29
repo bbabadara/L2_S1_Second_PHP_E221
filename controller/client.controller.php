@@ -4,8 +4,13 @@ if (isset($_REQUEST["page"])) {
         loadview("client/ajoutclient.html.php");
     } else 
      if ($_REQUEST["page"] == "listclient") {
-        $clients = findAllClients();
-        loadview("client/listclient.html.php", ["clients" => $clients]);
+        extract(countElement("client"));
+        $page=isset($_GET["pos"])?$_GET["pos"]:1;
+        $nbr_page=ceil($total/5);
+        $debut= ($page - 1)*5;
+        // dd($nbr_page);
+        $clients = findAllClients($debut);
+        loadview("client/listclient.html.php", ["clients" => $clients,"nbr_page"=> $nbr_page]);
     } else
     if ($_REQUEST["page"] == "addclient") {
         $errors = [];

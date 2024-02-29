@@ -38,3 +38,8 @@ function path(string $controller, string $page, array $additional = []): string
     }
     return $link;
 }
+
+function countElement(string $table){
+    $sql= "select count(*) as total from $table"  ;
+   return executeSelect($sql,[],true);
+}
