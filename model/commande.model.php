@@ -23,3 +23,23 @@ function findAllCommandesByClientId(int $filtre,$id,$debut=0):array{
      $sql=$sql." limit $debut,5";
     return executeSelect($sql,$filtre!=0?["id"=>$id,"filtre"=>$filtre]:["id"=>$id]);
 }
+function addCommande(array $ncom){
+    $sql="insert into commande (datec, montant, idetat, id) VALUES (:datec,:montant,:idetat,:id)";
+    executeUpdate($sql,$ncom);
+}
+
+function findLastCommandeId(){
+    $sql="SELECT idc FROM `commande` ORDER BY `commande`.`datec` DESC LIMIT 1;";
+    return executeSelect($sql,[],true);
+}
+
+function addToAvoir($idc,$table){
+    foreach ($table as $key => $value) {
+        $Navoir=[
+            "qtecmd"=>$value["qte"],
+            "idc"=>$idc,
+            "ida"=>$value["qte"]
+        ];
+    }
+
+}

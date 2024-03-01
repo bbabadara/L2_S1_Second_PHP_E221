@@ -7,7 +7,7 @@ function obligatoire(string $key, string $value, array &$errors, string $sms = "
 }
  
 
-function validate( array &$errors):bool
+function validate( array $errors):bool
 {
    return count($errors)==0;
 }
