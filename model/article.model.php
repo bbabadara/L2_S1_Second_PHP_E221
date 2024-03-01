@@ -12,6 +12,6 @@ function findArticlesByCommandeId($id,$debut){
 }
 
 function findArticleByRef($ref){
-    $sql="select *  from article Where libelle like':ref'";
+    $sql="select *  from article Where libelle like :ref";
     return executeSelect($sql,["ref"=>$ref],true);
 }
