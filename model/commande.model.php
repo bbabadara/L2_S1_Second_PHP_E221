@@ -33,13 +33,18 @@ function findLastCommandeId(){
     return executeSelect($sql,[],true);
 }
 
-function addToAvoir($idc,$table){
+function addavoir(array $ncom){
+    $sql="insert into avoir (qtecmd, idc,ida) VALUES (:qtecmd,:idc,:ida)";
+    executeUpdate($sql,$ncom);
+}
+function addToAvoir($idc,$table){ 
     foreach ($table as $key => $value) {
         $Navoir=[
             "qtecmd"=>$value["qte"],
             "idc"=>$idc,
-            "ida"=>$value["qte"]
+            "ida"=>$value["ida"]
         ];
+        addavoir($Navoir);
     }
 
 }

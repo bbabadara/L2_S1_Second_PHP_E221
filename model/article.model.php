@@ -50,3 +50,15 @@ function updateNcom($ref,&$all,$qte){
         }
     }
 }
+
+
+function updateArticleStock($stock,$ida){
+$sql="UPDATE `article` SET qtestock=(qtestock-:stock) WHERE ida =:ida";
+executeUpdate($sql,["stock"=>$stock,"ida"=>$ida]);
+}
+
+function updateArticleStock1($tab){
+    foreach ($tab as $key => $value) {
+        updateArticleStock($value["qte"],$value["ida"]);
+    }
+}

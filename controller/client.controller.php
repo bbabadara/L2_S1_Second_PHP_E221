@@ -36,7 +36,7 @@ if (isset($_REQUEST["page"])) {
                 redirectToRoute("client","listclient");
                 exit;
             } else {
-                $_SESSION["errors"] = ["tel" => "Ce numero de telephone existe deja!!!"];
+                $_SESSION["errors"]= ["tel" => "Ce numero de telephone existe deja!!!"];
             }
         } else {
             $_SESSION["errors"] = $errors;
