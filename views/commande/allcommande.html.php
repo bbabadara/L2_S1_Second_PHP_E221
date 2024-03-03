@@ -1,4 +1,9 @@
 <h1> Tous les commandes</h1>
+<div class="col-12 flex aic jcc">
+    <div class="col-8 flex aiend">
+        <button><a href="<?= path('commande', 'ajoutcommande') ?>">Ajouter</a></button>
+    </div>
+    </div>
 
 <form action="<?= WEBROOT ?>" method="get">
     <div class="formc flex aic jcc col-5">

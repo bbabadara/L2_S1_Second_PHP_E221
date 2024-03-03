@@ -53,8 +53,11 @@ if (isset($_SESSION["tab"])) {
             <!-- <input type="hidden" name="verif" value="ajoutartc"> -->
             <input type="hidden" name="controller" value="commande">
             <label for="message" class="mt1"><?= isset($tab["ref"]) ? $tab["ref"] : "" ?></label>
+            <?= !empty($_SESSION["client-c"]) ? "" : "Choisissez un client d'abord" ?>
             <div class="col-10">
+                <?php if (!empty($_SESSION["client-c"])):?>
                 <button type="submit" name="page" value="ajoutcommande" class="bgreen"> ok </button>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -87,13 +90,16 @@ if (isset($_SESSION["tab"])) {
     <div class="col-10">
 
         <label for="non">Qantite*</label>
-        <input type="number" name="qte" value="<?= isset($_SESSION["qte"]) ? $_SESSION["qte"] : "" ?>" <?= !empty($_SESSION["article"]) ? "" : "readonly" ?>>
+        <input type="texte" name="qte" value="<?= isset($_SESSION["qte"]) ? $_SESSION["qte"] : "" ?>" <?= !empty($_SESSION["article"]) ? "" : "readonly" ?>>
     </div>
 
     <input type="hidden" name="controller" value="commande">
     <label for="message" class="mt1"><?php if (isset($tab["qte"])) echo $tab["qte"] ?></label>
+    <?= !empty($_SESSION["article"]) ? "" : "Choisissez un article d'abord" ?>
     <div class="col-10">
+    <?php if (!empty($_SESSION["article"])):?>
         <button type="submit" name="page" value="ajoutcommande" class="bgreen"> Ajouter </button>
+        <?php endif; ?>
     </div>
     </div>
 

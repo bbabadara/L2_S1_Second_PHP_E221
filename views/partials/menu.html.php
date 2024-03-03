@@ -10,7 +10,7 @@
             <li><a href="<?= path('commande','commande')?>">Commandes</a></li> 
             <li><a href=" <?= path('client','listclient')?>">Clients</a></li>
             <!-- <li><a href="<?= WEBROOT?>/?controller=client&page=ajoutclient">Ajout client</a></li> -->
-            <li><a href="<?= path('commande','ajoutcommande')?>">Ajout commande</a></li>  
+            <!-- <li><a href="<?= path('commande','ajoutcommande')?>">Ajout commande</a></li>   -->
         </ul>
     </div>
 </div>

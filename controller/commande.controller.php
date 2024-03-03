@@ -14,13 +14,16 @@ if (isset($_REQUEST["page"])) {
     } else  if ($_REQUEST["page"] == "ajoutcommande") {
         //     extract(findLastCommandeId());
         //    dd( $_SESSION["ncom"]) ;
-        if (isset($_SESSION["allArticle"])) {
-            unset($_SESSION["allArticle"]);
-        }
+        // if (isset($_SESSION["allArticle"])) {
+        //     unset($_SESSION["allArticle"]);
+        // }
 
-        $_SESSION["allArticle"] = findAllArticlesNonPAgi();
 
         if (isset($_POST["tel"])) {
+            if (isset($_SESSION["allArticle"])) {
+                unset($_SESSION["allArticle"]);
+            }    
+
             if (isset($_SESSION["client-c"])) {
                 unset($_SESSION["client-c"]);
             }
@@ -33,6 +36,7 @@ if (isset($_REQUEST["page"])) {
             if (isset($_SESSION["ncom"])) {
                 unset($_SESSION["ncom"]);
             }
+            $_SESSION["allArticle"] = findAllArticlesNonPAgi();
             $_SESSION["ncom"] = [];
             $tab = [];
             $phone = trim($_POST["tel"]);
@@ -62,6 +66,7 @@ if (isset($_REQUEST["page"])) {
             $ref = trim($_POST["ref"]);
             obligatoire("ref", $ref, $tab);
             if (validate($tab)) {
+                // dd($_SESSION["allArticle"]);
                 $article = findArticleByRef1($ref, $_SESSION["allArticle"]);
                 if ($article) {
                     $_SESSION["article"] = $article;
@@ -79,33 +84,41 @@ if (isset($_REQUEST["page"])) {
                 unset($_SESSION["qte"]);
             }
             $tab = [];
-            $qte = intval(trim($_POST["qte"]));
+            $qte = trim($_POST["qte"]);
             obligatoire("qte", $qte, $tab);
             if (validate($tab)) {
-                $_SESSION["qte"] = $qte;
-                if ($qte < 0) {
-                    $_SESSION["tab"]["qte"] = "La quantite saisie doit etre superieur a zero!!!";
-                } else if ($_SESSION["article"]["qtestock"] >= $qte) {
-                    $nart = [
-                        "libelle" => $_SESSION["article"]["libelle"],
-                        "prix" => $_SESSION["article"]["prixunitaire"],
-                        "qte" => $qte,
-                        "ida" => $_SESSION["article"]["ida"]
-                    ];
+                
+                if (is_numeric($qte)) {
+                    $_SESSION["qte"] = $qte;
+                    if ($qte < 0) {
+                        $_SESSION["tab"]["qte"] = "La quantité saisie doit etre superieur a zero!!!";
+                    } else if ($_SESSION["article"]["qtestock"] >= $qte) {
+                        $nart = [
+                            "libelle" => $_SESSION["article"]["libelle"],
+                            "prix" => $_SESSION["article"]["prixunitaire"],
+                            "qte" => $qte,
+                            "ida" => $_SESSION["article"]["ida"]
+                        ];
 
-                    $xol = findArticleByref1($nart['libelle'], $_SESSION["ncom"]);
-                    if ($xol) {
-                        updateNcom($nart['libelle'], $_SESSION["ncom"], $qte);
-                        // dd($_SESSION["ncom"]);
+                        $xol = findArticleByref1($nart['libelle'], $_SESSION["ncom"]);
+                        if ($xol) {
+                            updateNcom($nart['libelle'], $_SESSION["ncom"], $qte);
+                            // dd($_SESSION["ncom"]);
+                        } else {
+                            $_SESSION["ncom"][] = $nart;
+                        }
+                        updateQte($nart["libelle"], $_SESSION["allArticle"], $qte);
+                        // dd($_SESSION["allArticle"]);
+                        $_SESSION["article"]["qtestock"] = $_SESSION["article"]["qtestock"] - $qte;
+
+                        // loadview("commande/ajoutcommande.html.php");
                     } else {
-                        $_SESSION["ncom"][] = $nart;
+                        $_SESSION["tab"]["qte"] = "La quantité saisie doit etre inferieur a la quantité en stock";
                     }
-                    updateQte($_SESSION["article"]["libelle"], $_SESSION["allArticle"], $qte);
-                    $_SESSION["article"]["qtestock"] = $_SESSION["article"]["qtestock"] - $qte;
-
-                    // loadview("commande/ajoutcommande.html.php");
                 } else {
-                    $_SESSION["tab"]["qte"] = "La quantite saisie doit etre inferieur a la quantite en stock";
+                  
+                    $_SESSION["tab"]["qte"] = "La quantité doit être numérique. Veuillez verifier votre saisie.";
+                   
                 }
             } else {
                 $_SESSION["tab"] = $tab;

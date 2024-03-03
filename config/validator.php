@@ -11,3 +11,7 @@ function validate( array $errors):bool
 {
    return count($errors)==0;
 }
+
+function verifNumber($n):bool{
+    return is_numeric($n);
+}
