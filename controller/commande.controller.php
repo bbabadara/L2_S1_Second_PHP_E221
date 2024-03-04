@@ -9,7 +9,7 @@ if (isset($_REQUEST["page"])) {
         $page = isset($_GET["pos"]) ? $_GET["pos"] : 1;
         $nbr_page = ceil($total / 5);
         $debut = ($page - 1) * 5;
-        $commandes = isset($key) ? findAllCommandesByClientId($filtre, $key, $debut) : findAllCommandes($filtre, $debut);
+        $commandes = isset($_GET["key"]) ? findAllCommandesByClientId($filtre, $_GET["key"], $debut) : findAllCommandes($filtre, $debut);
         loadview("commande/allcommande.html.php", ["commandes" => $commandes, "etats" => $etats, "nbr_page" => $nbr_page, "page" => $page]);
     } else  if ($_REQUEST["page"] == "ajoutcommande") {
         //     extract(findLastCommandeId());

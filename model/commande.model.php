@@ -15,7 +15,8 @@ function findAllEtats(){
 }
 
 function findAllCommandesByClientId(int $filtre,$id,$debut=0):array{
-    $sql="select *,DATE_FORMAT(datec, '%d/%m/%Y') as datec from commande c, etatcom et where cl.id=:id and c.idetat=et.idetat";
+   
+    $sql="select *,DATE_FORMAT(datec, '%d/%m/%Y') as datec from commande c, etatcom et,client cl where c.id= :id and c.idetat=et.idetat and c.id=cl.id";
    
     if ($filtre!=0) {
         $sql=$sql." and et.idetat=:filtre";
