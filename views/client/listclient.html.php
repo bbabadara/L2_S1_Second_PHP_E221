@@ -19,7 +19,7 @@
                 <td><?= $client["nom"] ?></td>
                 <td><?= $client["telephone"] ?></td>
                 <!-- <td> <a href="<?= WEBROOT ?>/?controller=commande&page=commande&key=<?= $client["id"] ?>"> Commandes</a> </td> -->
-                <td> <a href=" <?= path('commande', 'commande', ['key' => $client["id"]]) ?>"> Commandes</a> </td>
+                <td> <a href=" <?= path('commande', 'commande', ['key' => $client["id"],'client'=>$client["prenom"]." ".$client["nom"]]) ?>"> Commandes</a> </td>
             </tr>
         <?php endforeach ?>
     </tbody>

@@ -15,7 +15,7 @@ if (isset($_SESSION["tab"])) {
                 <input type="text" name="tel" value="<?= isset($_SESSION["client-c"]["telephone"]) ? $_SESSION["client-c"]["telephone"] : "" ?>">
             </div>
             <input type="hidden" name="controller" value="commande">
-            <label for="message" class="mt1"><?php if (isset($tab["tel"])) echo $tab["tel"] ?></label>
+            <label for="message" class="mt1 redcol"><?php if (isset($tab["tel"])) echo $tab["tel"] ?></label>
             <div class="col-10">
                 <button type="submit" name="page" value="ajoutcommande" class="bgreen"> ok </button>
             </div>
@@ -52,7 +52,7 @@ if (isset($_SESSION["tab"])) {
             </div>
             <!-- <input type="hidden" name="verif" value="ajoutartc"> -->
             <input type="hidden" name="controller" value="commande">
-            <label for="message" class="mt1"><?= isset($tab["ref"]) ? $tab["ref"] : "" ?></label>
+            <label for="message" class="mt1 redcol"><?= isset($tab["ref"]) ? $tab["ref"] : "" ?></label>
             <?= !empty($_SESSION["client-c"]) ? "" : "Choisissez un client d'abord" ?>
             <div class="col-10">
                 <?php if (!empty($_SESSION["client-c"])):?>
@@ -84,8 +84,10 @@ if (isset($_SESSION["tab"])) {
 
 </div>
 
-<form action="<?= WEBROOT ?>" method="post" class="col-12 flex aic jcsa"">
-        <div class=" formc mt3 col-6">
+<!-- <div class="col-12 flex aic jcsa"> -->
+
+<form action="<?= WEBROOT ?>" method="post" class="col-12 flex aic jcsa">
+        <div class=" formc mt3 col-5">
     <h2> Quantite a commander</h2>
     <div class="col-10">
 
@@ -94,7 +96,7 @@ if (isset($_SESSION["tab"])) {
     </div>
 
     <input type="hidden" name="controller" value="commande">
-    <label for="message" class="mt1"><?php if (isset($tab["qte"])) echo $tab["qte"] ?></label>
+    <label for="message" class="mt1 redcol"><?php if (isset($tab["qte"])) echo $tab["qte"] ?></label>
     <?= !empty($_SESSION["article"]) ? "" : "Choisissez un article d'abord" ?>
     <div class="col-10">
     <?php if (!empty($_SESSION["article"])):?>
@@ -105,12 +107,14 @@ if (isset($_SESSION["tab"])) {
 
 </form>
 
-<table>
+<!-- <div class="col-6 espaceTB"> -->
+<table class="">
     <thead>
         <th>Libelle</th>
         <th>Prix unitaire (fcfa)</th>
         <th> Quantite</th>
         <th>Montant (fcfa)</th>
+        <th>Action</th>
     </thead>
     <tbody>
         <?php if (!empty($_SESSION["ncom"])) : ?>
@@ -121,10 +125,12 @@ if (isset($_SESSION["tab"])) {
                     <td><?= $nart["prix"] ?> </td>
                     <td><?= $nart["qte"] ?></td>
                     <td><?= $nart["prix"] * $nart["qte"] ?> </td>
+                    <td> <a href="<?= path('commande','ajoutcommande',['remove'=>$key])?>" class="redcol">Enlever</a> </td>
+
                 </tr>
             <?php endforeach ?>
             <tr>
-                <td colspan="4">Total: <?= $som ?> fcfa</td>
+                <td colspan="5">Total: <?= $som ?> fcfa</td>
                 <?php $_SESSION["som"]=$som;?>
             </tr>
 
@@ -138,5 +144,7 @@ if (isset($_SESSION["tab"])) {
         <button type="submit" name="page" value="ajoutcommande" class="bgreen"> Commander </button>
 
     </form>
-</div>
+    </div>
+<!-- </div>
+</div> -->
 <?php endif ?>

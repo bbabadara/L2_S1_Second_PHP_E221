@@ -1,4 +1,4 @@
-<h1> Tous les commandes <?= isset($_GET["key"])? "du client " .$_GET['client'] :"" ?></h1>
+<h1> Tous les commandes</h1>
 <div class="col-12 flex aic jcc">
     <div class="col-8 flex aiend">
         <button><a href="<?= path('commande', 'ajoutcommande') ?>">Ajouter</a></button>

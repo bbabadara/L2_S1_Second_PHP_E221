@@ -9,6 +9,7 @@
             <li><a href="<?= path('article','article')?>">Articles</a></li>
             <li><a href="<?= path('commande','commande')?>">Commandes</a></li> 
             <li><a href=" <?= path('client','listclient')?>">Clients</a></li>
+            <li><a href="<?= path('payement','ajoutpayement')?>">Payment</a></li> 
             <!-- <li><a href="<?= path('client','ajoutclient')?>t">Ajout client</a></li> -->
             <!-- <li><a href="<?= path('commande','ajoutcommande')?>">Ajout commande</a></li>   -->
         </ul>

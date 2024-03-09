@@ -13,6 +13,7 @@ function loadview(string $views, array $data = [], $layout = "base")
 function redirectToRoute(string $controller, string $page)
 {
     header("location:" . WEBROOT . "/?controller=$controller&page=$page");
+    exit;
 }
 
 function estPositive($val)

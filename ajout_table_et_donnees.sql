@@ -29,6 +29,7 @@ CREATE TABLE commande(
 -- Creation de la table article
 CREATE TABLE article(
    ida INT NOT NULL AUTO_INCREMENT,
+   ref_art VARCHAR(50),
    libelle VARCHAR(50),
    prixunitaire VARCHAR(10),
    qtestock int,
@@ -42,6 +43,24 @@ CREATE TABLE avoir(
    ida INT NOT NULL,
    FOREIGN KEY(idc) REFERENCES commande(idc),
    FOREIGN KEY(ida) REFERENCES article(ida)
+);
+
+-- Creation de la table mode
+CREATE TABLE mode (
+    idmod INT AUTO_INCREMENT PRIMARY KEY,
+    nom_mod VARCHAR(20)
+);
+
+-- Creation de la table payement
+CREATE TABLE payement (
+    idpay INT AUTO_INCREMENT PRIMARY KEY,
+    datep DATE,
+    montantp VARCHAR(10),
+    id_mode INT,
+    id_commande INT,
+    ref_mode VARCHAR(50),
+    FOREIGN KEY (id_mode) REFERENCES mode(idmod),
+    FOREIGN KEY (id_commande) REFERENCES commande(idc)
 );
 
 
@@ -78,16 +97,16 @@ INSERT INTO commande (datec, montant, idetat, id) VALUES
 ('2024-02-28', '9000', 1, 9);
 
 -- Insertion de données dans la table article
-INSERT INTO article (libelle, prixunitaire, qtestock) VALUES
-('Article 1', '1000', 100),
-('Article 2', '2000', 150),
-('Article 3', '3000', 200),
-('Article 4', '1500', 75),
-('Article 5', '5000', 120),
-('Article 6', '2500', 180),
-('Article 7', '3500', 220),
-('Article 8', '4000', 90),
-('Article 9', '4500', 110);
+INSERT INTO article (ref_art,libelle, prixunitaire, qtestock) VALUES
+('REF001','Article 1', '1000', 100),
+('REF003','Article 3', '3000', 200),
+('REF002','Article 2', '2000', 150),
+('REF004','Article 4', '1500', 75),
+('REF005','Article 5', '5000', 120),
+('REF006','Article 6', '2500', 180),
+('REF007','Article 7', '3500', 220),
+('REF008','Article 8', '4000', 90),
+('REF009','Article 9', '4500', 110);
 
 -- Insertion de données dans la table avoir
 INSERT INTO avoir (qtecmd, idc, ida) VALUES
@@ -113,3 +132,26 @@ INSERT INTO avoir (qtecmd, idc, ida) VALUES
 (2, 8, 8),
 (4, 9, 9),
 (2, 9, 8);
+
+-- Insertion de données dans la table mode
+INSERT INTO mode (nom_mod) VALUES
+('Espece'),
+('Wave'),
+('Orange Money'); 
+
+-- Insertion de données dans la table payement
+INSERT INTO payement (datep, montantp, id_mode, id_commande, ref_mode) VALUES
+('2024-03-01', 3000, 1, 1, null),
+ ('2024-03-02', 1000, 2, 1, 'WAVE001'), 
+('2024-03-02', 4000, 2, 2, 'WAVE456'), 
+('2024-03-03', 8000, 3, 3, 'ORANGE789'), 
+('2024-03-04', 2000, 1, 4, null), -
+('2024-03-05', 2000, 2, 5, 'WAVE789'), 
+('2024-03-06', 12000, 3, 6, 'ORANGE123'), 
+('2024-03-07', 9000, 1, 7, null), 
+('2024-03-09', 10000, 3, 9, 'ORANGEDEF'), 
+('2024-03-10', 7000, 1, 10, null), 
+('2024-03-11', 8500, 2, 11, 'WAVE123'), 
+('2024-03-12', 9500, 3, 12, 'ORANGE456'); 
+
+SELECT c.*, SUM(montantp) as verser,(c.montant-SUM(montantp)) as restant FROM `payement` p,`commande` c,`client`cl WHERE c.id=cl.id AND cl.id=:id AND c.idc=p.idc GROUP BY p.idc HAVING verser<c.montant;

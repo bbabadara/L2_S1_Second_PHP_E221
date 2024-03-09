@@ -41,6 +41,12 @@
 .redcol{
     color: red;
 }
+.blackcol{
+    color: black;
+}
+.whitecol{
+    color: white;
+}
 
 .bgreen{
     background-color: rgb(34, 159, 34);
@@ -125,7 +131,7 @@ border-collapse: collapse;
 box-shadow: 2px 3px 2px 3px black;
 width: 70%;
 text-align: center;
-margin: 1% 15%;
+/* margin: 1% 15%; */
 table-layout: fixed;
 }
 
@@ -144,6 +150,38 @@ text-align: center;
 
 }
 
+.tabpay{
+    width: 100%;
+    text-align: start;
+    }
+    
+.tabpay th{
+    background-color: rgb(230, 230, 240);
+    padding: 1% ;
+    border: none;
+    color: black;
+    width: 100%;
+}
+    
+   .tabpay td {
+    border: none;
+    padding: 2%;
+    text-align: start;
+    }
+
+  .tabpay input,select {
+        width: 100%;
+        height: 4.5vh;
+        border: solid rgb(154, 154, 212) 1px;
+        background-color: rgb(245, 239, 239);
+        box-shadow: 1px 1px 1px 1px black;
+        margin-bottom: 1%;
+        margin-top: 1%;
+        padding: 1%;
+        border-radius: 5px;
+    
+    }
+
 
 
 tbody tr:nth-child(even) {
@@ -153,7 +191,8 @@ tbody tr:nth-child(even) {
 
 
 h1{
-margin: 2% 5%;
+text-align: center;
+margin: 1% 0;
 }
 
 .flex{
@@ -162,7 +201,7 @@ align-items: center;
 }
 
 .header{
-height: 15vh;
+height: 10vh;
 background-color: rgb(73, 73, 221);
 justify-content: space-around;
 color: white;
@@ -198,10 +237,10 @@ justify-content: space-between;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
-            width: 50%;
-            height: 90%;
+            width: 40%;
+            height: 80%;
             box-shadow: 1px 1px 1px 1px blue;
-            padding: 1% 2%;
+            padding: 1%;
         }
          
     
@@ -209,13 +248,13 @@ justify-content: space-between;
     
     select,
     input {
-        width: 100%;
-        height: 5vh;
+        width: 70%;
+        height: 4.5vh;
         border: solid rgb(154, 154, 212) 1px;
         background-color: rgb(245, 239, 239);
         box-shadow: 1px 1px 1px 1px #c14e07;
         margin-bottom: 1%;
-        margin-top: 2%;
+        margin-top: 1%;
         padding: 1%;
         border-radius: 5px;
     
@@ -227,20 +266,10 @@ justify-content: space-between;
         background-color: white;
         color: black;
     }
-    
-    textarea {
-        width: 100%;
-        border: none;
-        /* background-color: rgb(241, 232, 232); */
-        box-shadow: 1px 1px 1px 1px black;
-        margin-bottom: 2%;
-        margin-top: 1%;
-        padding: 2%;
-        border-radius: 5px;
-    }
+ 
     
     label {
-        font-size: 1.2em;
+        font-size: 1.05em;
         font-weight: 700;
         color: black;
     
@@ -251,7 +280,7 @@ justify-content: space-between;
         color: white;
         padding: 1%;
         font-weight: 900;
-        font-size: 1.2em;
+        font-size: 1.1em;
         cursor: pointer;
         transition: .8s;
     }

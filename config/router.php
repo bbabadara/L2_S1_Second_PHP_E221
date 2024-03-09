@@ -7,6 +7,8 @@ if (isset($_REQUEST["controller"])) {
         require_once(ROOT."/controller/article.controller.php");
     } else  if ($_REQUEST["controller"]=="client") {
         require_once(ROOT."/controller/client.controller.php");
+    }else  if ($_REQUEST["controller"]=="payement") {
+        require_once(ROOT."/controller/payement.controller.php");
     }
 }else {
     require_once(ROOT."/controller/article.controller.php");

@@ -47,13 +47,13 @@ if (isset($_REQUEST["page"])) {
                     $_SESSION["client-c"] = $client;
                     // dd( $_SESSION["client-c"]);
                 } else {
-                    $tab["tel"] = "Ce client n'existe pas! Veuillez verifier votre saisie.";
+                    $tab["tel"] = "Ce client n'existe pas! Veuillez verifier votre saisie, ou <a href=".path('client', 'ajoutclient').">l'ajouter</a>";
                     $_SESSION["tab"] = $tab;
                 }
             } else {
                 $_SESSION["tab"] = $tab;
             }
-        }
+        }else
 
         if (isset($_POST["ref"])) {
             if (isset($_SESSION["article"])) {
@@ -77,7 +77,7 @@ if (isset($_REQUEST["page"])) {
             } else {
                 $_SESSION["tab"] = $tab;
             }
-        }
+        }else
 
         if (isset($_POST["qte"])) {
             if (isset($_SESSION["qte"])) {
@@ -110,8 +110,6 @@ if (isset($_REQUEST["page"])) {
                         updateQte($nart["libelle"], $_SESSION["allArticle"], $qte);
                         // dd($_SESSION["allArticle"]);
                         $_SESSION["article"]["qtestock"] = $_SESSION["article"]["qtestock"] - $qte;
-
-                        // loadview("commande/ajoutcommande.html.php");
                     } else {
                         $_SESSION["tab"]["qte"] = "La quantité saisie doit etre inferieur a la quantité en stock";
                     }
@@ -123,7 +121,13 @@ if (isset($_REQUEST["page"])) {
             } else {
                 $_SESSION["tab"] = $tab;
             }
-        }
+        }else
+        if (isset($_GET["remove"])) {
+            upgrateQteAfterRemove($_SESSION["ncom"][$_GET["remove"]]["libelle"], $_SESSION["allArticle"], $_SESSION["ncom"][$_GET["remove"]]["qte"]);
+           unset($_SESSION["ncom"][$_GET["remove"]]);
+        //    $_SESSION["ncom"]= array_values($_SESSION["ncom"]);
+        //    dd($_SESSION["allArticle"]);  
+        } else
         if (isset($_POST["Acommander"])) {
             $Ncom = [
                 "datec" => date("Y-m-d"),

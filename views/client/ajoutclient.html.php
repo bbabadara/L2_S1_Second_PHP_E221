@@ -15,19 +15,19 @@ if (isset($_SESSION["tab"])) {
         <div class="col-10">
             <label for="non">Nom*</label>
             <br><span class="redcol"><?php if (isset($errors["nom"] )) echo $errors["nom"] ?></span>
-            <input type="text" name="nom" value="<?php if (isset($tab)) echo $tab["nom"] ?>">
+            <input type="text" name="nom" value="<?php if (isset($tab)) echo $tab["nom"] ?>" class="col-12">
             
         </div>
         <div class="col-10 mt1">
             <label for="non">Prenom*</label>
             <br><span class="redcol"><?php if (isset($errors["prenom"])) echo $errors["prenom"] ?></span>
-            <input type="text" name="prenom" value="<?php if (isset($tab)) echo $tab["prenom"] ?>">
+            <input type="text" name="prenom" value="<?php if (isset($tab)) echo $tab["prenom"] ?>" class="col-12">
             
         </div>
         <div class="col-10 mt1">
             <label for="non">Telephone*</label>
             <br><span class="redcol"><?php if (isset($errors["tel"])) echo $errors["tel"] ?></span>
-            <input type="text" name="tel" value="<?php if (isset($tab)) echo $tab["tel"] ?>" >
+            <input type="text" name="tel" value="<?php if (isset($tab)) echo $tab["tel"] ?>"  class="col-12">
             
         </div>
         <input type="hidden" name="controller" value="client">

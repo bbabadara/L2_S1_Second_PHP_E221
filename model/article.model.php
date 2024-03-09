@@ -41,6 +41,17 @@ function updateQte($ref,&$all,$qte){
     }
 }
 
+function  upgrateQteAfterRemove($ref,&$all,$qte){
+    //  dd($all);
+    foreach ($all as $key => $value) {
+        if ($value["libelle"]==$ref) {
+             $all[$key]["qtestock"]=$all[$key]["qtestock"]+$qte;
+             break;
+            //  dd($value);
+        }
+    }
+}
+
 function updateNcom($ref,&$all,$qte){
     foreach ($all as $key =>$value) {
         if ($value["libelle"]==$ref) {

@@ -1,4 +1,4 @@
-<h1> Tous les articles <?= isset($key)? "" :"de la commande" ?></h1>
+<h1> Tous les articles <?= isset($_GET["key"])? "de la commande" :"" ?></h1>
  <table  >
     <thead>
         <th>Libelle</th>
