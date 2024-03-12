@@ -29,6 +29,13 @@ function dd($test)
     die("Yallah pitié");
 }
 
+function dumpOnly($test)
+{
+    echo "<pre>";
+    var_dump($test);
+
+}
+
 function path(string $controller, string $page, array $additional = []): string
 {
     $link = WEBROOT . "/?controller=$controller&page=$page";

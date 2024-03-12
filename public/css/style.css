@@ -34,6 +34,26 @@
     margin-top: 5%;
 }
 
+.pad1{
+    padding: 1%;
+}
+.pad2{
+    padding: 2%;
+}
+.pad3{
+    padding: 3%;
+}
+.pad4{
+    padding: 4%;
+}
+.pad5{
+    padding: 5%;
+}
+
+.padbut{
+    padding: 3% 12% ;
+}
+
 .bred{
     background-color: rgb(226, 63, 63);
 }
@@ -51,6 +71,8 @@
 .bgreen{
     background-color: rgb(34, 159, 34);
 }
+
+
 
 .espaceTB {
     margin: 1% 0%;
@@ -152,7 +174,6 @@ text-align: center;
 
 .tabpay{
     width: 100%;
-    text-align: start;
     }
     
 .tabpay th{
@@ -166,7 +187,7 @@ text-align: center;
    .tabpay td {
     border: none;
     padding: 2%;
-    text-align: start;
+    text-align: center;
     }
 
   .tabpay input,select {
@@ -291,6 +312,13 @@ justify-content: space-between;
         color: black;
     }
     
+    button:hover a {
+        color: black;
+    }
+
+    a:hover {
+        color: black;
+    }
     
     .butfiltre {
        margin-left: 5%;

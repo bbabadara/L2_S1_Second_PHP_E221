@@ -8,3 +8,12 @@ function findAllMode( ){
     $sql="select *  from mode ";
     return executeSelect($sql);
 }
+
+function findIfExistOnVersement( $idc, array $all):bool{
+    foreach ($all as $value) {
+        if ($value["idc"]==$idc) {
+            return false;
+        }
+    }
+   return true;
+}
