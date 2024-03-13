@@ -17,3 +17,22 @@ function findIfExistOnVersement( $idc, array $all):bool{
     }
    return true;
 }
+
+function addpayement(array $Npayement){
+    $sql="insert into payement (datep, montantp, idmod,idc,ref_mode) values (:datep, :montantp, :idmod, :idc,:ref_mode)";
+    executeUpdate($sql,$Npayement);
+}
+
+
+function mAddPayement(array $payment){
+    foreach ($payment as $value) {
+        $Npayement=[
+            "datep"=>$value["datep"],
+            "montantp"=>$value["verse"],
+            "idmod"=>$value["mode"],
+            "idc"=>$value["idc"],
+            "ref_mode"=>isset($value["refmode"])?$value["refmode"]:null
+        ];
+        addpayement($Npayement);
+    }
+}

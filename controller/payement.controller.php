@@ -3,13 +3,11 @@
 if (isset($_REQUEST["page"])) {
 
     if ($_REQUEST["page"] == "ajoutpayement") {
+       
         $modes = findAllMode();
         loadview("payement/ajoutpayement.html.php", ["modes" => $modes]);
     } else
     if ($_REQUEST["page"] == "findClientPaye") {
-        if (isset($_SESSION["payement"])) {
-            unset($_SESSION["payement"]);
-        }
         initPay();
         $tab = [];
         $phone = trim($_POST["tel"]);
@@ -57,22 +55,40 @@ if (isset($_REQUEST["page"])) {
         // dd($tab);
         if (validate($tab)) {
             // dd($tab);
+
+            for ($i=0; $i <count($_SESSION["payement"]["versement"]) ; $i++) { 
+                if ($_POST["verse".$i]>  $_SESSION["payement"]["versement"][$i]["restant"]) {
+                    $tab["verse" . $i]="Le montant doit etre inferieur ou egal au restant";
+                }
+            }
+
+            if (validate($tab)) {
+
             for ($i = 0; $i < count($_SESSION["payement"]["versement"]); $i++) {
                 $_SESSION["payement"]["versement"][$i]["datep"]= $_POST["datep"];
                 $_SESSION["payement"]["versement"][$i]["verse"]= $_POST["verse". $i];
                 $_SESSION["payement"]["versement"][$i]["mode"]= $_POST["mode".$i];
-                if ($_POST["mode" . $i] == 1) {
+                if ($_POST["mode".$i]!=1) {
                 $_SESSION["payement"]["versement"][$i]["refmode"]= $_POST["refmode".$i];
                 }
+            }}else {
+                $_SESSION["tab"] = $tab;
             }
             // dd($tab);
-            dd($_SESSION["payement"]["versement"]);
+            // dd($_SESSION["payement"]["versement"]);
         } else {
             $_SESSION["tab"] = $tab;
         }
 
 
         // dd($tab);
+        redirectToRoute("payement", "ajoutpayement");
+    }
+    else
+    if ($_REQUEST["page"] == "saveVersement") {
+        mAddPayement( $_SESSION["payement"]["versement"]);
+        initPay();
+      $_SESSION["tab"]["success"]="Payement entegister! Entre un numero pour faire un autre payement.";
         redirectToRoute("payement", "ajoutpayement");
     }
 }
@@ -82,18 +98,11 @@ function initPay()
     $payement = [
         "commandes" =>
         [
-            [
-                "datec" => "",
-                "montant" => "",
-                "verser" => "",
-                "restant" => ""
-            ]
+
         ],
         "client" =>
         [
-            "nom" => "",
-            "prenom" => "",
-            "tel" => ""
+
         ],
         "versement" => []
 

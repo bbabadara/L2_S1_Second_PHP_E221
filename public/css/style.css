@@ -60,6 +60,10 @@
 
 .redcol{
     color: red;
+    font-size: 13px;
+}
+.greencol{
+    color: green;  
 }
 .blackcol{
     color: black;

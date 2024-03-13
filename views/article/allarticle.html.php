@@ -1,4 +1,5 @@
 <h1> Tous les articles <?= isset($_GET["key"])? "de la commande" :"" ?></h1>
+<div class="col-12 flex aic jcc espaceTB">
  <table  >
     <thead>
         <th>Libelle</th>
@@ -16,7 +17,7 @@
     </tbody>
 
  </table>
-
+</div>
  <div class="flex jcc aic col-12 espaceTB">
     <div class="pagination ">
         <?php if ($page > 1) : ?>
@@ -31,3 +32,4 @@
         <?php endif ?>
     </div>
 </div>
+

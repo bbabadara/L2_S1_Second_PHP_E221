@@ -5,6 +5,7 @@
         <button><a href="<?= path('client', 'ajoutclient') ?>">Ajouter</a></button>
     </div>
 </div>
+<div class="col-12 flex aic jcc espaceTB">
 <table>
     <thead>
         <th>Prenom</th>
@@ -25,6 +26,7 @@
     </tbody>
 
 </table>
+        </div>
 <div class="flex jcc aic col-12 espaceTB">
     <div class="pagination ">
         <?php if ($page > 1) : ?>

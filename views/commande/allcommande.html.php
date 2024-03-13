@@ -19,6 +19,7 @@
         </div>
     </div>
 </form>
+<div class="col-12 flex aic jcc espaceTB">
 <table>
     <thead>
         <th>commande</th>
@@ -42,6 +43,7 @@
 
     </tbody>
 </table>
+        </div>
 <div class="flex jcc aic col-12 espaceTB">
     <div class="pagination ">
         <?php if ($page > 1) : ?>

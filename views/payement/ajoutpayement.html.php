@@ -2,6 +2,7 @@
 if (isset($_SESSION["tab"])) {
     $tab = $_SESSION["tab"];
     unset($_SESSION["tab"]);
+    // dd($tab);
 }
 if (isset($_SESSION["line"])) {
     $line = $_SESSION["line"];
@@ -9,11 +10,17 @@ if (isset($_SESSION["line"])) {
 }
 if (isset($_SESSION["payement"])) {
     $pay = $_SESSION["payement"];
+ }else {
+    $pay=[
+        "commandes"=>[],
+        "versement"=>[],
+    ];
  }
 // dd($pay);
 ?>
 
 <h1> Faire un payement</h1>
+<div class="col-12 flex aic jcc"><label for="message" class="mt1 greencol"><?php if (isset($tab["success"])) echo $tab["success"] ?></label></div>
 <div class="col-12 flex aic jcsa">
     <form action="<?= WEBROOT ?>" method="post" class="col-5">
         <div class="formc mt3 col-12">
@@ -58,7 +65,7 @@ if (isset($_SESSION["payement"])) {
                     <td><?=$value["montant"] ?></td>
                     <td><?=$value["verser"] ?></td>
                     <td><?=$value["restant"] ?></td>
-                    <td><button class="bgreen padbut"> <a href="<?= path('payement', 'addToVersement', ['line' =>$key ]) ?>" class="whitecol">+</a></button> <br> <?php if (isset($tab["ajoutv"])&& $key==$line) echo $tab["ajoutv"] ?>  </td>
+                    <td> <a href="<?= path('payement', 'addToVersement', ['line' =>$key ]) ?>" class="whitecol"><button class="bgreen padbut">+</button></a> <br> <?php if (isset($tab["ajoutv"])&& $key==$line) echo $tab["ajoutv"] ?>  </td>
                 </tr>
                 <?php endforeach ?>
 
@@ -73,7 +80,8 @@ if (isset($_SESSION["payement"])) {
         <form action="<?= WEBROOT ?>" method="post" style="display: block;">
         <div class="flex">
             <label for="">Date payement: </label>
-            <input  type="date" name="datep" class="col-5"  >
+            <input  type="date" name="datep" class="col-5" value="<?=isset($pay["versement"][0]["datep"])?$pay["versement"][0]["datep"]:"date('Y-m-d')"?>" >
+            <label for="message" class="mt1 redcol"><?php if (isset($tab["datep"])) echo $tab["datep"] ?></label>
         </div>
         <input type="hidden" name="controller" value="payement">
         <div class="flex aiend">
@@ -93,23 +101,30 @@ if (isset($_SESSION["payement"])) {
                 <tr>
                     <td><input type="text" value="<?=$value['datec']?>" class="col-12" readonly></td>
                     <td><input type="text" value="<?=$value['restant']?>" class="col-12" readonly></td>
-                    <td><input type="number" value="" name="<?='verse'.$key?>" class="col-12" placeholder="Entrer la somme"></td>
+                    <td><input type="number"  name="<?='verse'.$key?>" class="col-12" placeholder="Entrer la somme" value="<?php if (isset($value["verse"])) echo $value["verse"] ?>"> 
+                    <br>  <label for="message" class="mt1 redcol"><?php if (isset($tab["verse".$key])) echo $tab["verse".$key] ?></label>
+                </td>
+
                     <td>
                         <select name="<?='mode'.$key?>" id="" class="col-12">
                     <?php foreach ($modes as $mode) :?>
-                        <option value="<?=$mode["idmod"]?>"><?=$mode["nom_mod"]?></option>
+                        <option value="<?=$mode["idmod"]?>" <?php if(isset($value["mode1"]))if ($mode["idmod"]== $value["mode"] ) echo "selected" ?>><?=$mode["nom_mod"]?></option>
                         <?php endforeach ?>
                     </select>
                      </td>
-                    <td> <input type="text" value="" name="<?='refmode'.$key?>" class="col-12" placeholder="Entrer la reference"> </td>
-                    <td> <button class="bred padbut"><a href="<?= path('payement','removeToVersement', ['remove' => $key]) ?>" class="whitecol">-</a></button>  </td>
+                    <td> <input type="text"  name="<?='refmode'.$key?>" class="col-12" placeholder="Entrer la reference" value="<?php if (isset($value["refmode"])) echo $value["refmode"] ?>">
+                    <br>  <label for="message" class="mt1 redcol"><?php if (isset($tab["refmode".$key])) echo $tab["refmode".$key] ?></label>
+                </td>
+                    <td> <button class="bred padbut"> <a href="<?= path('payement','removeToVersement', ['remove' => $key]) ?>" class="whitecol">-</a></button>  </td>
                 </tr>
                 <?php endforeach ?>
             </tbody>
 
         </table>
         </form>
-        <button class="bgreen espaceTB"><a href="<?= path('payement', 'saveVersement') ?>" class="whitecol">Enregistrer</a>
+        <?php if (isset($pay["versement"][0]["verse"])):?>
+        <a href="<?= path('payement', 'saveVersement') ?>" class="whitecol mt3"><button class="bgreen  mt2">Enregistrer</button></a>
+        <?php endif ?>
     </div>
 
 

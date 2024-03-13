@@ -107,7 +107,7 @@ if (isset($_SESSION["tab"])) {
 
 </form>
 
-<!-- <div class="col-6 espaceTB"> -->
+<div class="col-12 flex aic jcc espaceTB">
 <table class="">
     <thead>
         <th>Libelle</th>
@@ -145,6 +145,7 @@ if (isset($_SESSION["tab"])) {
 
     </form>
     </div>
-<!-- </div>
-</div> -->
+
+
 <?php endif ?>
+</div> 
